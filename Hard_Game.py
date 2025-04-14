@@ -7,60 +7,60 @@ def HardGame():
        resolution = (GameWidth,GameHeight)= (1000,600)
        screen = pygame.display.set_mode(resolution)
 
-       background = pygame.image.load("GUI\\background.png")
+       background = pygame.image.load("Assets\\GUI\\background.png")
        background = pygame.transform.scale(background,resolution)
        screen.blit(background,(0,0))
 
        #Game properties
        columns,rows,padding,score, card_width, card_height = 5,4,10,0,78,120
        clicked,now,win,pause, GameFlag =False,False,False,False,True
-       font = pygame.font.Font("Font\\BAUHS93.TTF",40)
+       font = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",40)
 
        LeftMargin = (GameWidth-card_width*columns - padding*(columns-1))//2
        TopMargin = (GameHeight-card_height*rows - padding*(rows-1))//2
 
        ImagesDisplay, permission = [], []
 
-       Card_back = pygame.image.load("GUI\\Full Card back.png")
+       Card_back = pygame.image.load("Assets\\GUI\\Full Card back.png")
        Card_back = pygame.transform.scale(Card_back,(card_width,card_height))
 
        #Music
-       winning_music = pygame.mixer.Sound("Sounds\\Winning.mp3")
-       bonus_music = pygame.mixer.Sound("Sounds\\Bonus.mp3")
-       wrong_music = pygame.mixer.Sound("Sounds\\Wrong.mp3")
-       Lose_music = pygame.mixer.Sound("Sounds\\YouLose.wav")
+       winning_music = pygame.mixer.Sound("Assets\\Sounds\\Winning.mp3")
+       bonus_music = pygame.mixer.Sound("Assets\\Sounds\\Bonus.mp3")
+       wrong_music = pygame.mixer.Sound("Assets\\Sounds\\Wrong.mp3")
+       Lose_music = pygame.mixer.Sound("Assets\\Sounds\\YouLose.wav")
 
        #Timer\\Time's up
-       TimerFont = pygame.font.Font("Font\\BAUHS93.TTF",60)
-       TimesUp_text = pygame.font.Font("Font\\BAUHS93.TTF",70)
+       TimerFont = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",60)
+       TimesUp_text = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",70)
        TimesUp_text = TimerFont.render("Time\'s up", True, "dark green")       
        TimerStart = 59
 
 
        ###   Mazen   ###
        #pause button
-       pause_button = pygame.image.load("GUI\\pause.png")
+       pause_button = pygame.image.load("Assets\\GUI\\pause.png")
        pause_button = pygame.transform.scale(pause_button,(50,40))
        pause_rect = pause_button.get_rect()
        pause_rect.left, pause_rect.top = 950,20
        screen.blit(pause_button,pause_rect)
 
        #menu
-       menu = pygame.image.load("GUI\\menu.png")
+       menu = pygame.image.load("Assets\\GUI\\menu.png")
        menu = pygame.transform.scale(menu,(600,450))
        menu_rect = menu.get_rect()
        menu_rect.left = 0.5*(GameWidth-600)
        menu_rect.top = 0.5*(GameHeight-450)
 
        #continue button
-       continue_button = pygame.image.load("GUI\\continue.png")
+       continue_button = pygame.image.load("Assets\\GUI\\continue.png")
        continue_button = pygame.transform.scale(continue_button,(400,100))
        continue_rect = continue_button.get_rect()
        continue_rect.left = 0.5*(GameWidth-400)
        continue_rect.top = 0.5*(GameHeight-450)+120
 
        #exit buttons
-       exit_button = pygame.image.load("GUI\\exit.png")
+       exit_button = pygame.image.load("Assets\\GUI\\exit.png")
        exit_button = pygame.transform.scale(exit_button,(400,100))
        exit_rect = exit_button.get_rect()
        exit_rect.left = 0.5*(GameWidth-400)
@@ -71,11 +71,11 @@ def HardGame():
        exit2_rect.top = 0.5*(GameHeight-500)+250
 
        #you win text
-       you_win = pygame.font.Font("Font\\BAUHS93.TTF",70)
+       you_win = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",70)
        you_win = you_win.render('You Win!', True, "dark green")
 
        #play again button
-       play_again = pygame.image.load("GUI\\play again.png")
+       play_again = pygame.image.load("Assets\\GUI\\play again.png")
        play_again = pygame.transform.scale(play_again,(400,100))
        play_again_rect = play_again.get_rect()
        play_again_rect.left, play_again_rect.top = 300,200
@@ -84,7 +84,7 @@ def HardGame():
        def animation(name,reverse=False):
               sprite = []
               for k in range(9):
-                     sprite.append(pygame.image.load(f"Animation/{name}/0{k}_{name} Sprite2.png"))
+                     sprite.append(pygame.image.load(f"Assets\\Animation/{name}/0{k}_{name} Sprite2.png"))
               sprite_scale = []
               for i in sprite:
                      sprite1 = pygame.transform.scale(i,(card_width,card_height))
@@ -129,7 +129,7 @@ def HardGame():
                      Lose_music.play(0)
 
        #List of images names
-       PicNames_list=[image.split(".")[0] for image in os.listdir("Hard Images/")]   #list of names of cards
+       PicNames_list=[image.split(".")[0] for image in os.listdir("Assets\\Hard Images/")]   #list of names of cards
        PicNames_list_copy=PicNames_list[:]                                       #temp list for copying items
        for i in PicNames_list_copy:                                          #adding items again
               PicNames_list.append(i)                 
@@ -139,7 +139,7 @@ def HardGame():
        images = []
        images_rect=[]
        for item in PicNames_list:
-              image = pygame.image.load(f"Hard Images/{item}.png")                      #loading of images
+              image = pygame.image.load(f"Assets\\Hard Images/{item}.png")                      #loading of images
               image = pygame.transform.scale(image,(card_width,card_height))             #scaling of images
               images.append(image)                                                  #appending images into a list
               image_rect= image.get_rect()                                          #declaring a rectangle for each image

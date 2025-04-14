@@ -8,14 +8,14 @@ def EasyGame():
        screen = pygame.display.set_mode(resolution)
 
        #background
-       background = pygame.image.load("GUI\\background.png")
+       background = pygame.image.load("Assets\\GUI\\background.png")
        background = pygame.transform.scale(background,resolution)
        screen.blit(background,(0,0))
 
        #Game properties
        columns,rows,padding,score,card_width, card_height = 4,3,10,0,100,150
        clicked,now,win,pause =False,False,False,False
-       font = pygame.font.Font("Font\\BAUHS93.TTF",40)
+       font = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",40)
        LeftMargin = (GameWidth-card_width*columns - padding*(columns-1))//2
        TopMargin = (GameHeight-card_height*rows - padding*(rows-1))//2
 
@@ -23,35 +23,35 @@ def EasyGame():
        ImagesDisplay, permission = [], []
 
        #Card back
-       Card_back = pygame.image.load("GUI\\Full Card back.png")
+       Card_back = pygame.image.load("Assets\\GUI\\Full Card back.png")
        Card_back = pygame.transform.scale(Card_back,(card_width,card_height))
 
        #Music
-       winning_music = pygame.mixer.Sound("Sounds\\Winning.mp3")
-       bonus_music = pygame.mixer.Sound("Sounds\\Bonus.mp3")
-       wrong_music = pygame.mixer.Sound("Sounds\\Wrong.mp3")
+       winning_music = pygame.mixer.Sound("Assets\\Sounds\\Winning.mp3")
+       bonus_music = pygame.mixer.Sound("Assets\\Sounds\\Bonus.mp3")
+       wrong_music = pygame.mixer.Sound("Assets\\Sounds\\Wrong.mp3")
 
        ###   Mazen   ###
        #pause button
-       pause_button = pygame.image.load("GUI\\pause.png")
+       pause_button = pygame.image.load("Assets\\GUI\\pause.png")
        pause_button = pygame.transform.scale(pause_button,(50,40))
        pause_rect = pause_button.get_rect()
        pause_rect.left, pause_rect.top = 950,20
        screen.blit(pause_button,pause_rect)
        #menu
-       menu = pygame.image.load("GUI\\menu.png")
+       menu = pygame.image.load("Assets\\GUI\\menu.png")
        menu = pygame.transform.scale(menu,(600,450))
        menu_rect = menu.get_rect()
        menu_rect.left, menu_rect.top = 0.5*(GameWidth-600), 0.5*(GameHeight-450)
 
        #continue button
-       continue_button = pygame.image.load("GUI\\continue.png")
+       continue_button = pygame.image.load("Assets\\GUI\\continue.png")
        continue_button = pygame.transform.scale(continue_button,(400,100))
        continue_rect = continue_button.get_rect()
        continue_rect.left, continue_rect.top = 0.5*(GameWidth-400), 0.5*(GameHeight-450)+120
 
        #exit buttons
-       exit_button = pygame.image.load("GUI\\exit.png")
+       exit_button = pygame.image.load("Assets\\GUI\\exit.png")
        exit_button = pygame.transform.scale(exit_button,(400,100))
        exit_rect = exit_button.get_rect()
        exit_rect.left, exit_rect.top = 0.5*(GameWidth-400), 0.5*(GameHeight-500)+150
@@ -60,11 +60,11 @@ def EasyGame():
        exit2_rect.left, exit2_rect.top = 0.5*(GameWidth-400), 0.5*(GameHeight-500)+250
 
        #you win text
-       you_win = pygame.font.Font("Font\\BAUHS93.TTF",70)
+       you_win = pygame.font.Font("Assets\\Font\\BAUHS93.TTF",70)
        you_win = you_win.render('You Win!', True, "dark green")
 
        #play again button
-       play_again = pygame.image.load("GUI\\play again.png")
+       play_again = pygame.image.load("Assets\\GUI\\play again.png")
        play_again = pygame.transform.scale(play_again,(400,100))
        play_again_rect = play_again.get_rect()
        play_again_rect.left, play_again_rect.top = 300,200
@@ -73,7 +73,7 @@ def EasyGame():
        def animation(name,reverse=False):
               sprite = []
               for k in range(9):
-                     sprite.append(pygame.image.load(f"Animation/{name}/0{k}_{name} Sprite2.png"))
+                     sprite.append(pygame.image.load(f"Assets\\Animation/{name}/0{k}_{name} Sprite2.png"))
               sprite_scale = []
               for i in sprite:
                      sprite1 = pygame.transform.scale(i,(card_width,card_height))
@@ -102,14 +102,14 @@ def EasyGame():
                      pygame.display.flip()
 
        #List of images names
-       PicNames_list=[image.split(".")[0] for image in os.listdir("Easy Images/")]   #list of names of cards
+       PicNames_list=[image.split(".")[0] for image in os.listdir("Assets\\Easy Images/")]   #list of names of cards
        PicNames_list+=PicNames_list[:]                                               #copying list elements             
        random.shuffle(PicNames_list)                                                 #randomizing the list
 
        #List of images & rect
        images, images_rect = [], []
        for k in PicNames_list:
-              image = pygame.image.load(f"Easy Images/{k}.png")                      #loading of images
+              image = pygame.image.load(f"Assets\\Easy Images/{k}.png")                      #loading of images
               image = pygame.transform.scale(image,(card_width,card_height))             #scaling of images
               images.append(image)                                                  #appending images into a list
               image_rect= image.get_rect()                                          #declaring a rectangle for each image
@@ -173,13 +173,13 @@ def EasyGame():
                                           if images_rect[i].collidepoint(event.pos):
                                                  #First card
                                                  if not(clicked) and permission[i]=="permitted" and pause==False:
-                                                        clicked = ImagesDisplay[i]="2"###
+                                                        clicked = ImagesDisplay[i]="2"
                                                         check_display()
                                                         selection1 = PicNames_list[i]
                                                         selection1_index=i
-                                                        ###   Mazen   ###
+
                                                         for j in range(9):
-                                                               animation_var=animation(selection1)[j]
+                                                               animation_var = animation(selection1)[j]
                                                                wait(0.005)
                                                                screen.blit(background,(0,0))
                                                                screen.blit(pause_button,pause_rect)
@@ -191,13 +191,13 @@ def EasyGame():
                                                  #Second Card
                                                  elif clicked and permission[i]=="permitted" and now==True and pause==False:
                                                         now=False
-                                                        ImagesDisplay[i]="2"###
+                                                        ImagesDisplay[i]="2"
                                                         
                                                         check_display()
                                                         selection2 = PicNames_list[i]
                                                         
                                                         if selection1==selection2 and i!=selection1_index:
-                                                               ###   Mazen   ###
+
                                                                for j in range(9):
                                                                       animation_var=animation(selection2)[j]
                                                                       wait(0.005)
@@ -217,10 +217,10 @@ def EasyGame():
                                                         elif selection1==selection2 and i==selection1_index:
                                                                wrong_music.play(0)
                                                                wait(0.5)
-                                                               ImagesDisplay[i] = ImagesDisplay[selection1_index] ="2"####
+                                                               ImagesDisplay[i] = ImagesDisplay[selection1_index] ="2"
                                                                check_display()
                                                                now=True
-                                                               ###   Mazen   ###
+
                                                                for j in range(9):
                                                                       animation_var0=animation(selection1,True)[j]
                                                                       wait(0.005)
@@ -230,10 +230,10 @@ def EasyGame():
                                                                       check_display()
                                                                       screen.blit(animation_var0,images_rect[selection1_index])
                                                                clicked=False
-                                                               ImagesDisplay[i]=ImagesDisplay[selection1_index]=False###
+                                                               ImagesDisplay[i]=ImagesDisplay[selection1_index]=False
                                                                                                                        
                                                         else:
-                                                               ###   Mazen   ###
+
                                                                for j in range(9):
                                                                       animation_var=animation(selection2)[j]
                                                                       wait(0.005)
@@ -246,10 +246,10 @@ def EasyGame():
 
                                                                wrong_music.play(0)
                                                                wait(0.5)
-                                                               ImagesDisplay[i] = ImagesDisplay[selection1_index] ="2"####
+                                                               ImagesDisplay[i] = ImagesDisplay[selection1_index] ="2"
                                                                check_display()
                                                                now=True
-                                                               ###   Mazen   ###
+
                                                                for j in range(9):
                                                                       animation_var0=animation(selection1,True)[j]
                                                                       animation_var1=animation(selection2,True)[j]
@@ -261,8 +261,8 @@ def EasyGame():
                                                                       screen.blit(animation_var0,images_rect[selection1_index])
                                                                       screen.blit(animation_var1,images_rect[i])
                                                                clicked=False
-                                                               ImagesDisplay[i]=ImagesDisplay[selection1_index]=False###
-                             ###   Mazen   ###
+                                                               ImagesDisplay[i]=ImagesDisplay[selection1_index]=False
+
                             if pause_rect.collidepoint(event.pos) and pause==False:
                                    pause=True
                             elif continue_rect.collidepoint(event.pos) and pause==True:

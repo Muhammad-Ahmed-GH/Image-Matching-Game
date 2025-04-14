@@ -5,7 +5,7 @@ from Menu import Menu
 white, gray, dark_gray = (255, 255, 255), (200, 200, 200), (150, 150, 150)
 
 def soundConfig():
-    BackgroundMusic = pygame.mixer.Sound("Sounds\\background.mp3")
+    BackgroundMusic = pygame.mixer.Sound("Assets\\Sounds\\background.mp3")
     BackgroundMusic.set_volume(0.4)
     BackgroundMusic.play(-1)
 
@@ -13,10 +13,10 @@ def setTitle():
     pygame.display.set_caption("Image matching")
 
 def setIcon():
-    pygame.display.set_icon(pygame.image.load("GUI\\Cherries.ico"))
+    pygame.display.set_icon(pygame.image.load("Assets\\GUI\\Cherries.ico"))
 
 def playButnConfig():
-    play_butn = pygame.image.load("GUI\\play.png")
+    play_butn = pygame.image.load("Assets\\GUI\\play.png")
     play_butn = pygame.transform.scale(play_butn,(400,100))
     return play_butn
 
@@ -51,10 +51,10 @@ more_hover_color = gray
 more = False
 
 #Home background
-background = pygame.image.load("GUI\\background.jpeg")
+background = pygame.image.load("Assets\\GUI\\background.jpeg")
 screen.blit(background,(0,0))
 
-more_menu = pygame.image.load("GUI\\More menu.png")
+more_menu = pygame.image.load("Assets\\GUI\\More menu.png")
 
 #Drawing buttons
 pygame.draw.rect(screen, play_color, play_rect)
